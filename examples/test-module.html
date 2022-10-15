@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>tslib</title>
+  </head>
+
+  <body>
+    <p>
+      This demo is using the ES module. (needs a http server to work)
+    </p>
+    <p>
+      Open JS console.
+    </p>
+
+    <script type="module">
+      import * as tslib from '../dist/tslib.mjs';
+
+      const someInstance = new tslib.SomeClass({firstname: "Jane"})
+      console.log(someInstance.getFullName())
+    </script>
+  </body>
+</html>

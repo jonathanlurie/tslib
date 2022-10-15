@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>tslib</title>
+  </head>
+
+  <body>
+    <p>
+      This demo is using the UMD bundle. (can work without a HTTP server)
+    </p>
+    <p>
+      Open JS console.
+    </p>
+
+    <script src ="../dist/tslib.umd.js"></script>
+    
+    <script>
+      const someInstance = new tslib.SomeClass({firstname: "Jane"})
+      console.log(someInstance.getFullName())
+    </script>
+  </body>
+</html>
