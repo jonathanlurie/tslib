@@ -3,19 +3,45 @@ import esbuild from 'rollup-plugin-esbuild';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import globals from 'rollup-plugin-node-globals';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import pkg from './package.json';
+
 
 
 const bundles = [
   // ES module, not minified + sourcemap
   {
     plugins: [
-      esbuild()
+      json(),
+      esbuild(),
     ],
     output: [
       {
         file: `dist/${pkg.name}.mjs`,
         format: "es",
+        sourcemap: true
+      }
+    ],
+    input: "src/index.ts",
+    watch: {
+      include: 'src/**'
+    },
+    external: []
+  },
+
+  // CJS module, not minified + sourcemap
+  {
+    plugins: [
+      nodeResolve(),
+      commonjs({ include: 'node_modules/**' }),
+      globals(),
+      json(),
+      esbuild()
+    ],
+    output: [
+      {
+        file: `dist/${pkg.name}.cjs`,
+        format: "cjs",
         sourcemap: true
       }
     ],
@@ -32,6 +58,7 @@ const bundles = [
       nodeResolve(), // for the standalone UMD, we want to resolve so that the bundle contains all the dep.
       commonjs({ include: 'node_modules/**' }),
       globals(),
+      json(),
       esbuild()
     ],
     output: [
@@ -46,6 +73,7 @@ const bundles = [
     watch: {
       include: 'src/**'
     },
+    external: []
   },
 
   // types
@@ -66,6 +94,7 @@ if (process.env.NODE_ENV === 'production') {
   // ES module, minified
   {
     plugins: [
+      json(),
       esbuild({
         sourceMap: false,
         minify: true,
@@ -85,6 +114,7 @@ if (process.env.NODE_ENV === 'production') {
       nodeResolve(), // for the standalone UMD, we want to resolve so that the bundle contains all the dep.
       commonjs({ include: 'node_modules/**' }),
       globals(),
+      json(),
       esbuild({
         sourceMap: false,
         minify: true,
@@ -102,6 +132,7 @@ if (process.env.NODE_ENV === 'production') {
     watch: {
       include: 'src/**'
     },
+    external: []
   })
 
 }
