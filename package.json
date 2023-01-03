@@ -6,6 +6,12 @@
   "types": "dist/tslib.d.ts",
   "type": "module",
   "author": "Jonathan Lurie",
+  "exports": {
+    ".": {
+      "import": "./dist/tslib.mjs",
+      "require": "./dist/tslib.cjs"
+    }
+  },
   "scripts": {
     "build": "rm -rf dist/*; NODE_ENV=production rollup -c",
     "dev": "rm -rf dist/*; NODE_ENV=development rollup -c -w",
