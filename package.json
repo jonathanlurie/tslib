@@ -4,7 +4,6 @@
   "description": "Boilerplate for a core Typescript library",
   "module": "dist/tslib.mjs",
   "types": "dist/tslib.d.ts",
-  "type": "module",
   "author": "Jonathan Lurie",
   "exports": {
     ".": {
